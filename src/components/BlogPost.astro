@@ -1,15 +1,16 @@
 ---
 import Author from './Author.astro';
+import dayjs from 'dayjs';
 
 export interface Props {
   title: string;
   author: string;
-  publishDate: string;
+  date: string;
   heroImage: string;
   alt: string;
 }
 
-const { title, author, publishDate, heroImage, alt } = Astro.props;
+const { title, author, date, heroImage, alt } = Astro.props;
 ---
 
 <div class="layout">
@@ -17,11 +18,11 @@ const { title, author, publishDate, heroImage, alt } = Astro.props;
   <div>
     <header>
       {heroImage && <img width="720" height="420" class="hero-image" loading="lazy" src={heroImage} alt={alt} />}
-      <p class="publish-date">{publishDate}</p>
+      <p class="publish-date">{dayjs(date).format('MMM DD YYYY')}</p>
       <h1 class="title">{title}</h1>
-      <Author name="@lindsaykawrdell" href="https://twitter.com/lindsaykwardell" />
+      <Author name={author} href="https://twitter.com/lindsaykwardell" />
     </header>
-    <main>
+    <main class="prose m-auto">
       <slot />
     </main>
   </div>
@@ -36,6 +37,7 @@ const { title, author, publishDate, heroImage, alt } = Astro.props;
   margin-top: 2rem;
   margin-bottom: 4rem;
   max-width: 1280px;
+  max-height: 420px;
 }
 
 @media (max-width: 50em) {

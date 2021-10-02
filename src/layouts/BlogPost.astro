@@ -5,17 +5,19 @@ import BlogHeader from '../components/BlogHeader.astro';
 import BlogPost from '../components/BlogPost.astro';
 
 const {content} = Astro.props;
-const {title, snippet, publishDate, author, image, permalink, alt} = content;
+const {title, snippet, date, author, image, permalink, alt} = content;
 ---
 <html lang={ content.lang || 'en' }>
   <head>
     <BaseHead title={title} description={snippet} permalink={permalink} />
-    <link rel="stylesheet" href="/blog.css" />
+    <style global lang="scss">
+      @use "prismjs/themes/prism-tomorrow.css";
+    </style>
   </head>
 
   <body>
     <BlogHeader />
-    <BlogPost title={title} author={author} heroImage={image} publishDate={publishDate} alt={alt}>
+    <BlogPost title={title} author={author} heroImage={image} date={date} alt={alt}>
       <slot />
     </BlogPost>
   </body>
