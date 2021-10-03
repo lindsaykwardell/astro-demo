@@ -1,24 +1,12 @@
 ---
 // Component Imports
 import BaseLayout from '../layouts/BaseLayout.astro'
-import BaseHead from '../components/BaseHead.astro';
-import BlogHeader from '../components/BlogHeader.astro';
 import BlogPostPreview from '../components/BlogPostPreview.astro';
 import { fetchFromGitHub } from '../api/github.mJs';
 
 interface MarkdownFrontmatter {
   date: Date;
 }
-
-// Component Script:
-// You can write any JavaScript/TypeScript that you'd like here.
-// It will run during the build, but never in the browser.
-// All variables are available to use in the HTML template below.
-let title = 'Lindsay Wardell';
-let description = 'An awesome person writing awesome stuff';
-let permalink = 'https://lindsaykwardell.com/';
-
-// Data Fetching: List all Markdown posts in the repo.
 
 let allPosts = Astro.fetchContent<MarkdownFrontmatter>('./blog/*.md');
 allPosts = allPosts.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
@@ -72,83 +60,75 @@ let github = await fetchFromGitHub(`
 // Full Astro Component Syntax:
 // https://docs.astro.build/core-concepts/astro-components/
 ---
-<html lang="en">
-  <head>
-    <BaseHead title={title} description={description} permalink={permalink} />
-  </head>
-
-  <body>
-    <BaseLayout>
-      <div class="relative w-full flex justify-center items-center text-center px-8">
-        <div class="flex flex-wrap justify-between w-full mb-24">
-          <div class="w-full xl:w-1/2 flex flex-col items-center">
+<BaseLayout>
+  <div class="relative w-full flex justify-center items-center text-center px-8">
+    <div class="flex flex-wrap justify-between w-full mb-24">
+      <div class="w-full xl:w-1/2 flex flex-col items-center">
+        <img
+          src={github?.user?.avatarUrl}
+          alt={github?.user?.name}
+          class="rounded-full shadow-xl w-64 my-4"
+        />
+        <h1 class="title text-6xl py-3 font-medium">
+          { github?.user?.name }
+        </h1>
+        <h2 class="text-3xl lg:text-4xl leading-9 font-medium py-4">
+          { github?.user?.bio }
+        </h2>
+        <div class="flex w-full pt-4">
+          <div
+            class="flex-1 flex justify-center items-center p-2 tech-logo-wrapper"
+          >
             <img
-              src={github?.user?.avatarUrl}
-              alt={github?.user?.name}
-              class="rounded-full shadow-xl w-64 my-4"
+              class="tech-logo"
+              src="/vue.png"
+              width="100"
+              alt="Vue"
             />
-            <h1 class="title text-6xl py-3 font-medium">
-              { github?.user?.name }
-            </h1>
-            <h2 class="text-3xl lg:text-4xl leading-9 font-medium py-4">
-              { github?.user?.bio }
-            </h2>
-            <div class="flex w-full pt-4">
-              <div
-                class="flex-1 flex justify-center items-center p-2 tech-logo-wrapper"
-              >
-                <img
-                  class="tech-logo"
-                  src="/vue.png"
-                  width="100"
-                  alt="Vue"
-                />
-              </div>
-              <div
-                class="flex-1 flex justify-center items-center p-2 tech-logo-wrapper"
-              >
-                <img
-                  class="tech-logo"
-                  src="/tailwind.png"
-                  width="100"
-                  alt="Tailwind CSS"
-                />
-              </div>
-              <div
-                class="flex-1 flex justify-center items-center p-2 tech-logo-wrapper"
-              >
-                <img
-                  class="tech-logo"
-                  src="/typescript.jpg"
-                  width="100"
-                  alt="Typescript"
-                />
-              </div>
-              <div
-                class="flex-1 flex justify-center items-center p-2 tech-logo-wrapper"
-              >
-                <img
-                  class="tech-logo"
-                  src="/nodejs.png"
-                  width="100"
-                  alt="NodeJS"
-                />
-              </div>
-            </div>
           </div>
           <div
-            class="w-full xl:w-1/3 pt-6 xl:pt-0 flex flex-col items-center justify-end"
+            class="flex-1 flex justify-center items-center p-2 tech-logo-wrapper"
           >
-            <h2>Latest Post</h2>
-            <BlogPostPreview post={allPosts[0]} />
+            <img
+              class="tech-logo"
+              src="/tailwind.png"
+              width="100"
+              alt="Tailwind CSS"
+            />
+          </div>
+          <div
+            class="flex-1 flex justify-center items-center p-2 tech-logo-wrapper"
+          >
+            <img
+              class="tech-logo"
+              src="/typescript.jpg"
+              width="100"
+              alt="Typescript"
+            />
+          </div>
+          <div
+            class="flex-1 flex justify-center items-center p-2 tech-logo-wrapper"
+          >
+            <img
+              class="tech-logo"
+              src="/nodejs.png"
+              width="100"
+              alt="NodeJS"
+            />
           </div>
         </div>
-        <div
-          class="fixed bottom-0 w-full h-16 flex justify-center items-center bg-gray-900 dark:bg-gray-800 text-white transition duration-100"
-        >
-          <!-- <SocialLinks /> -->
-        </div>
       </div>
-    </BaseLayout>
-  </body>
-</html>
+      <div
+        class="w-full xl:w-1/3 pt-6 xl:pt-0 flex flex-col items-center justify-end"
+      >
+        <h2>Latest Post</h2>
+        <BlogPostPreview post={allPosts[0]} />
+      </div>
+    </div>
+    <div
+      class="fixed bottom-0 w-full h-16 flex justify-center items-center bg-gray-900 dark:bg-gray-800 text-white transition duration-100"
+    >
+      <!-- <SocialLinks /> -->
+    </div>
+  </div>
+</BaseLayout>
