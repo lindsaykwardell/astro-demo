@@ -12,8 +12,8 @@
       dark:border-gray-900
       w-16
       h-16
-      text-xl
-      hover:text-2xl
+      text-3xl
+      hover:text-4xl
       z-20
       transition
       duration-100
