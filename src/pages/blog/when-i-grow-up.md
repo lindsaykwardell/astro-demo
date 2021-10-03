@@ -98,8 +98,3 @@ In 2002, I dreamed of being a website designer. Today, I know that I made that h
 So now, I'll ask you:
 
 **"What do you want to be when you grow up?"** 
-
-<route lang="yaml">
-meta:
-  layout: blog
-</route>

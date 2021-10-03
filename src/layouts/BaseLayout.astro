@@ -54,9 +54,11 @@ let github = await fetchFromGitHub(`
       }
       `)
 ---
-<html lang="en" class="dark">
+<html lang="en">
   <head>
-    <BaseHead title={title} description={description} permalink={permalink} />
+    <BaseHead title={title} description={description} permalink={permalink}>
+      <slot name="head"></slot>
+    </BaseHead>
   </head>
 
   <body>

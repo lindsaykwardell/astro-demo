@@ -28,7 +28,7 @@
 export default {
   data() {
     return {
-      isDark: false,
+      isDark: localStorage.getItem("darkMode") === "true",
     };
   },
   methods: {
@@ -40,6 +40,7 @@ export default {
     isDark: {
       immediate: true,
       handler() {
+        localStorage.setItem("darkMode", this.isDark);
         const html = document.querySelector("html");
 
         if (this.isDark) {
@@ -51,21 +52,13 @@ export default {
     },
   },
   mounted() {
-    this.isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const prev = localStorage.getItem("darkMode");
+
+    if (prev !== undefined) {
+      this.isDark = prev === "true";
+    } else {
+      this.isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
   },
 };
-// import { onMounted, ref } from "vue";
-// const html = document.querySelector("html");
-
-// const isDark = ref(html.classList.contains("dark"));
-
-// function toggleDarkMode() {
-//   isDark.value = !isDark.value;
-//   html.classList.toggle("dark");
-// }
-
-// onMounted(() => {
-//   isDark.value = !isDark.value;
-//   toggleDarkMode();
-// });
 </script>

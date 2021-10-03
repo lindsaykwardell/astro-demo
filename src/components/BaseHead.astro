@@ -41,6 +41,21 @@ const { title, description, permalink } = Astro.props;
   href={Astro.resolve("../styles/global.css")}
 >
 
+<script>
+const html = document.querySelector("html");
+const darkMode = localStorage.getItem("darkMode") === 'true';
+
+if (darkMode === undefined) {
+  darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+}
+ 
+if (darkMode) {
+  html.classList.add("dark");
+}
+
+localStorage.setItem("darkMode", darkMode);
+</script>
+
 <style global lang="postcss">
 body {
   @apply bg-gray-200 transition duration-100;
@@ -129,3 +144,5 @@ hr {
   }
 }
 </style>
+
+<slot></slot>
