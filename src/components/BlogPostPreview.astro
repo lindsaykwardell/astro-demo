@@ -10,6 +10,7 @@ const { post } = Astro.props;
   <header>
     <h3 class="publish-date">{dayjs(post.date).format('MMM DD, YYYY')}</h3>
     <a href={post.url}><h1 class="title">{post.title}</h1></a>
+    <img src={post.image} alt="" />
   </header>
   <main>
     <p>{post.snippet}</p>
@@ -34,8 +35,6 @@ header {
   text-align: left;
   align-items: flex-start;
   justify-content: center;
-
-  padding-bottom: 2rem;
 }
 
 .title,
