@@ -33,3 +33,49 @@ export const fetchFromGitHub = async (graphQLQuery) => {
     })
   ).data;
 };
+
+export const getData = () => fetchFromGitHub(`
+query {
+  user(login:"lindsaykwardell"){
+    name
+    bio
+    isHireable
+    url
+    avatarUrl
+    pinnedItems(first:6,types:[REPOSITORY]) {
+      nodes{
+        ... on Repository {
+          name
+          url
+          description
+          stargazerCount
+          licenseInfo{
+            name
+          }
+          primaryLanguage {
+            color
+            name
+          }
+        }
+      }
+    }
+    repositories(first:6, orderBy:{
+      field:UPDATED_AT, direction: DESC
+    }){
+      nodes{
+        name
+        url
+        description
+        stargazerCount
+        licenseInfo{
+          name
+        }
+        primaryLanguage {
+          color
+          name
+        }
+      }
+    }
+  }
+}
+`)

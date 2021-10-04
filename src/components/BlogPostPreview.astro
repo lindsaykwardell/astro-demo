@@ -1,66 +1,77 @@
 ---
 import dayjs from 'dayjs'
 export interface Props {
-  post: any;
+  item: any;
 }
 
-const { post } = Astro.props;
+const { item } = Astro.props;
 ---
-<article class="post-preview">
-  <header>
-    <h3 class="publish-date">{dayjs(post.date).format('MMM DD, YYYY')}</h3>
-    <a href={post.url}><h1 class="title">{post.title}</h1></a>
-    <img class="post-image" src={post.image} alt="" />
-  </header>
-  <main>
-    <p>{post.snippet}</p>
-    <a href={post.url}>Read more</a>
-  </main>
-</article>
+<div class="blog-item bg-white dark:bg-gray-800 transition duration-100">
+  <a
+    href={item.url}
+    class="hover:no-underline w-full"
+  >
+    {item.image && <div class="blog-image-wrapper">
+      <img
+        class="blog-image dark:bg-white transition duration-100"
+        src={item.image}
+        alt={item.title}
+      />
+    </div>}
+    <div class="p-3">
+      <h3 class="blog-title leading-8 pb-4">{ item.title }</h3>
+      <div class="hidden md:block">
+        <!-- <TagPill v-for="tag in item.tags" :key="tag">{{ tag }}</TagPill> -->
+      </div>
+      <p
+          class="blog-snippet text-gray-600 dark:text-gray-500 transition duration-100"
+        >
+          { item.snippet }
+        </p>
+    </div>
+  </a>
+</div>
 
-<style>
-.content :global(main > * + *) {
-  margin-top: 1rem;
+<style lang="postcss">
+.blog-item {
+  @apply shadow-md rounded-lg relative overflow-hidden flex justify-center;
+  /* height: 415px; */
+  animation: 0.3s ease-out 0s 1 shift;
+
+  .blog-image {
+    @apply transition duration-500;
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+    /* filter: blur(3px); */
+  }
+
+  &:hover {
+    .blog-title {
+      @apply underline;
+    }
+
+    .blog-image {
+      transform: scale(1.1);
+      filter: blur(0);
+    }
+  }
 }
 
-.post-image {
+.blog-image-wrapper {
+  height: 300px;
   width: 100%;
-  object-fit: cover;
-  object-position: center;
-  max-width: 1280px;
-  max-height: 260px;
-  background: white;
+  overflow: hidden;
 }
 
-.post-preview {
-  padding-bottom: 2rem;
-  margin-bottom: 2rem;
-  border-bottom: 4px solid var(--theme-divider);
-}
-
-header {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.title,
-.author,
-.publish-date {
-  margin: 0;
-}
-
-.publish-date,
-.author {
-  font-size: 1.25rem;
-  color: var(--theme-text-lighter);
-}
-
-.title {
-  font-size: 2.25rem;
-  font-weight: 700;
-  color: var(--theme-text);
+@keyframes shift {
+  0% {
+    transform: translateY(30%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 </style>

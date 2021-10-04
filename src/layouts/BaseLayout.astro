@@ -2,57 +2,13 @@
 // Component Imports
 import BaseHead from '../components/BaseHead.astro';
 import DarkModeButton from '../components/DarkModeButton.vue'
-import { fetchFromGitHub } from '../api/github.mJs';
+import { getData } from '../api/github.mjs';
+
+const github = await getData();
 
 let title = 'Lindsay Wardell';
 let description = 'An awesome person writing awesome stuff';
 let permalink = 'https://lindsaykwardell.com/';
-
-let github = await fetchFromGitHub(`
-      query {
-        user(login:"lindsaykwardell"){
-          name
-          bio
-          isHireable
-          url
-          avatarUrl
-          pinnedItems(first:6,types:[REPOSITORY]) {
-            nodes{
-              ... on Repository {
-                name
-                url
-                description
-                stargazerCount
-                licenseInfo{
-                  name
-                }
-                primaryLanguage {
-                  color
-                  name
-                }
-              }
-            }
-          }
-          repositories(first:6, orderBy:{
-            field:UPDATED_AT, direction: DESC
-          }){
-            nodes{
-              name
-              url
-              description
-              stargazerCount
-              licenseInfo{
-                name
-              }
-              primaryLanguage {
-                color
-                name
-              }
-            }
-          }
-        }
-      }
-      `)
 ---
 <html lang="en">
   <head>
