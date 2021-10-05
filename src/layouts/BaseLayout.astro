@@ -18,7 +18,7 @@ let permalink = 'https://lindsaykwardell.com/';
   </head>
 
   <body>
-    <div class="relative">
+    <div class="relative flex flex-col min-h-[100vh]">
       <nav
         class="bg-lindsay w-full h-16 md:h-20 flex items-center px-6 shadow-md fixed z-10"
       >
@@ -39,9 +39,14 @@ let permalink = 'https://lindsaykwardell.com/';
           <a href="/podcast" class="px-4 py-2 rounded">Podcast</a>
         </div>
       </nav>
-      <main>
+      <main class="flex-grow pb-16">
         <slot></slot>
       </main>
+      <div
+        class="w-full h-16 flex justify-center items-center bg-gray-900 dark:bg-gray-800 text-white transition duration-100"
+      >
+        <!-- <SocialLinks /> -->
+      </div>
       <DarkModeButton client:only />
     </div>
   </body>
