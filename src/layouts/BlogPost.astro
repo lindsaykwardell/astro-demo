@@ -1,8 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro'
-import BaseHead from '../components/BaseHead.astro';
-import BlogHeader from '../components/BlogHeader.astro';
-import BlogPost from '../components/BlogPost.astro';
+import dayjs from 'dayjs'
 
 const {content} = Astro.props;
 const {title, snippet, date, author, image, permalink, alt} = content;
@@ -24,7 +22,7 @@ const {title, snippet, date, author, image, permalink, alt} = content;
         <div
           class="text-center pt-2 text-gray-600 dark:text-gray-500 transition duration-100"
         >
-          Published by { author } on { date }
+          Published by { author } on { dayjs(date).format("MMM DD YYYY") }
         </div>
         <!-- <SocialLinks class="m-auto pt-3" /> -->
       </div>

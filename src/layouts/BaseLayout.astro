@@ -2,6 +2,7 @@
 // Component Imports
 import BaseHead from '../components/BaseHead.astro';
 import DarkModeButton from '../components/DarkModeButton.vue'
+import SocialLinks from '../components/SocialLinks.vue'
 import { getData } from '../api/github.mjs';
 
 const github = await getData();
@@ -39,14 +40,14 @@ let permalink = 'https://lindsaykwardell.com/';
           <a href="/podcast" class="px-4 py-2 rounded">Podcast</a>
         </div>
       </nav>
-      <main class="flex-grow pb-16">
+      <main class="flex-grow mb-16">
         <slot></slot>
       </main>
-      <div
+      <footer
         class="w-full h-16 flex justify-center items-center bg-gray-900 dark:bg-gray-800 text-white transition duration-100"
       >
-        <!-- <SocialLinks /> -->
-      </div>
+        <SocialLinks client:idle />
+      </footer>
       <DarkModeButton client:only />
     </div>
   </body>
