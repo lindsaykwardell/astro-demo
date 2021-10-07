@@ -4,12 +4,11 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 import BlogPostPreview from '../components/BlogPostPreview.astro';
 import { getData } from '../api/github.mjs';
 
-interface MarkdownFrontmatter {
-  date: Date;
-}
+const posts = Astro.fetchContent('./blog/*.md');
 
-let allPosts = Astro.fetchContent<MarkdownFrontmatter>('./blog/*.md');
-allPosts = allPosts.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
+const allPosts = posts.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
+
+console.log(allPosts[0]);
 
 let github = await getData();
 
