@@ -8,4 +8,5 @@ snippet: " "
 tags:
   - vue
   - javascript
+layout: '../../layouts/ExternalPostLayout.astro'
 ---

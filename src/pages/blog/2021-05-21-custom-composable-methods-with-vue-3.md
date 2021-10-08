@@ -10,4 +10,5 @@ tags:
   - Javascript
   - Composition API
   - Web Development
+layout: '../../layouts/ExternalPostLayout.astro'
 ---

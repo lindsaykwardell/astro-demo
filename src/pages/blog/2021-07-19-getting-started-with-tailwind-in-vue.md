@@ -10,4 +10,5 @@ tags:
   - Vue
   - Tailwind
   - CSS
+layout: '../../layouts/ExternalPostLayout.astro'
 ---

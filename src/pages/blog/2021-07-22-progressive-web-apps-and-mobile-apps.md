@@ -9,4 +9,5 @@ tags:
   - Javascript
   - PWA
   - Mobile Apps
+layout: '../../layouts/ExternalPostLayout.astro'
 ---

@@ -8,4 +8,5 @@ snippet: " "
 tags:
   - Javascript
   - TC39
+layout: '../../layouts/ExternalPostLayout.astro'
 ---

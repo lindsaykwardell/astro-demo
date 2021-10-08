@@ -9,4 +9,5 @@ tags:
   - Vue
   - Javascript
   - Composition API
+layout: '../../layouts/ExternalPostLayout.astro'
 ---

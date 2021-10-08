@@ -10,4 +10,5 @@ tags:
   - Javascript
   - Web Development
 snippet: 
+layout: '../../layouts/ExternalPostLayout.astro'
 ---
